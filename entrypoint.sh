@@ -20,6 +20,13 @@ fi
 npm config set prefix /root/sandbox/.npm-global
 npm config set cache /root/sandbox/.npm-cache
 
+# Add npm global bin to PATH in shell profile (for SSH sessions)
+if ! grep -q "npm-global/bin" /root/.bashrc 2>/dev/null; then
+    echo '' >> /root/.bashrc
+    echo '# NPM Global Path' >> /root/.bashrc
+    echo 'export PATH="/root/sandbox/.npm-global/bin:$PATH"' >> /root/.bashrc
+fi
+
 # Generate SSH host keys if they don't exist (persistent in sandbox)
 if [ ! -f /root/sandbox/.ssh-keys/ssh_host_rsa_key ]; then
     echo "Generating SSH host keys..."
