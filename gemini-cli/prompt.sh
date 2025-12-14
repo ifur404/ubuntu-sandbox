@@ -22,14 +22,12 @@ while [[ $# -gt 0 ]]; do
             IMAGE="$2"
             shift 2
             ;;
-        -p|--prompt)
-            PROMPT="$2"
-            shift 2
-            ;;
         *)
-            # First non-flag argument is prompt
+            # Collect all non-flag arguments as prompt
             if [ -z "$PROMPT" ]; then
                 PROMPT="$1"
+            else
+                PROMPT="$PROMPT $1"
             fi
             shift
             ;;
@@ -38,21 +36,16 @@ done
 
 if [ -z "$PROMPT" ]; then
     echo "Usage: $0 \"prompt text\" [-f image_path]" >&2
-    echo "       $0 -p \"prompt text\" [-f image_path]" >&2
     exit 1
 fi
 
-# Build gemini command
-CMD="gemini -p \"$PROMPT\""
-
-# Add image if provided
+# Run gemini with positional prompt, yolo mode, text output
 if [ -n "$IMAGE" ]; then
     if [ ! -f "$IMAGE" ]; then
         echo "Error: Image file not found: $IMAGE" >&2
         exit 1
     fi
-    CMD="$CMD -f \"$IMAGE\""
+    gemini --yolo --output-format text "$PROMPT" -f "$IMAGE"
+else
+    gemini --yolo --output-format text "$PROMPT"
 fi
-
-# Run with auto-accept for dangerous actions (--yolo flag)
-eval "$CMD --yolo --sandbox off"
