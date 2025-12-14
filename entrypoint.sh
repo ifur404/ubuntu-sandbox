@@ -4,8 +4,21 @@ set -e
 # Set root password from environment variable
 echo "root:${SSH_PASSWORD:-changeme}" | chpasswd
 
-# Create ssh keys directory in sandbox mount
+# Create persistent directories
 mkdir -p /root/sandbox/.ssh-keys
+mkdir -p /root/sandbox/.npm-global
+mkdir -p /root/sandbox/.npm-cache
+mkdir -p /root/sandbox/.gemini
+
+# Symlink Gemini CLI config to persistent location
+if [ ! -L /root/.gemini ]; then
+    rm -rf /root/.gemini
+    ln -sf /root/sandbox/.gemini /root/.gemini
+fi
+
+# Configure npm to use persistent directories
+npm config set prefix /root/sandbox/.npm-global
+npm config set cache /root/sandbox/.npm-cache
 
 # Generate SSH host keys if they don't exist (persistent in sandbox)
 if [ ! -f /root/sandbox/.ssh-keys/ssh_host_rsa_key ]; then
@@ -25,6 +38,9 @@ echo "Ubuntu Sandbox Container Started"
 echo "=========================================="
 echo "SSH Port: 22 (mapped to host 2222)"
 echo "Ubuntu Version: $(cat /etc/lsb-release | grep DISTRIB_DESCRIPTION | cut -d'=' -f2 | tr -d '\"')"
+echo "Node Version: $(node --version)"
+echo "NPM Version: $(npm --version)"
+echo "NPM Global: /root/sandbox/.npm-global"
 echo "=========================================="
 
 # Start SSH daemon in foreground
