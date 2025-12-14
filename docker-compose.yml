@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  ubuntu-sandbox:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ubuntu-sandbox
+    environment:
+      - SSH_PASSWORD=${SSH_PASSWORD:-changeme}
+      - TZ=${TZ:-UTC}
+    ports:
+      - "2222:22" # SSH
+    volumes:
+      - ./sandbox:/root/sandbox
+    restart: unless-stopped
+    networks:
+      - coolify
+
+networks:
+  coolify:
+    external: true
+    name: coolify
