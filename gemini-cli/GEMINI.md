@@ -3,7 +3,7 @@
 ## Directory Structure
 
 ```
-/root/sandbox/
+/root/sandbox/gemini-cli/
 ├── memory/           # Long-term memory storage
 ├── context/          # Current session context
 ├── output/           # Generated outputs (reports, files)
@@ -19,7 +19,7 @@
 Save important facts, user preferences, and learned information:
 
 ```bash
-/root/sandbox/memory/
+/root/sandbox/gemini-cli/memory/
 ├── facts.json        # Important facts
 ├── preferences.json  # User preferences
 ├── history.json      # Conversation summaries
@@ -31,7 +31,7 @@ Save important facts, user preferences, and learned information:
 Current session temporary context:
 
 ```bash
-/root/sandbox/context/
+/root/sandbox/gemini-cli/context/
 ├── current.json      # Current task context
 └── variables.json    # Session variables
 ```
@@ -41,7 +41,7 @@ Current session temporary context:
 Save generated content:
 
 ```bash
-/root/sandbox/output/
+/root/sandbox/gemini-cli/output/
 ├── reports/          # Generated reports
 ├── code/             # Generated code files
 ├── exports/          # Exported data
@@ -56,13 +56,13 @@ Save generated content:
 
 ## Commands
 
-| Action       | Location                 |
-| ------------ | ------------------------ |
-| Save memory  | `/root/sandbox/memory/`  |
-| Save context | `/root/sandbox/context/` |
-| Save output  | `/root/sandbox/output/`  |
-| Temp files   | `/root/sandbox/temp/`    |
-| Logs         | `/root/sandbox/logs/`    |
+| Action       | Location                            |
+| ------------ | ----------------------------------- |
+| Save memory  | `/root/sandbox/gemini-cli/memory/`  |
+| Save context | `/root/sandbox/gemini-cli/context/` |
+| Save output  | `/root/sandbox/gemini-cli/output/`  |
+| Temp files   | `/root/sandbox/gemini-cli/temp/`    |
+| Logs         | `/root/sandbox/gemini-cli/logs/`    |
 
 ## Best Practices
 
