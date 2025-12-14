@@ -10,14 +10,11 @@ mkdir -p /root/sandbox/.npm-global
 mkdir -p /root/sandbox/.npm-cache
 mkdir -p /root/sandbox/.gemini
 
-# Create agent workspace directories
-mkdir -p /root/sandbox/memory
-mkdir -p /root/sandbox/context
-mkdir -p /root/sandbox/output
-mkdir -p /root/sandbox/temp
-mkdir -p /root/sandbox/logs
-mkdir -p /root/sandbox/data
-mkdir -p /root/sandbox/doc
+# Create agent workspace directories for gemini-cli
+mkdir -p /root/sandbox/gemini-cli/{memory,context,output,temp,logs,data}
+
+# Create agent workspace directories for codex-cli
+mkdir -p /root/sandbox/codex-cli/{memory,context,output,temp,logs,data}
 
 # Always sync CLI tools and docs from image to persistent storage
 echo "Syncing CLI tools and docs..."
