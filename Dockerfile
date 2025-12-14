@@ -16,8 +16,8 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/* \
     && mkdir -p /var/run/sshd
 
-# Install Node.js LTS via NodeSource
-RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - \
+# Install Node.js v24
+RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash - \
     && apt-get install -y nodejs \
     && rm -rf /var/lib/apt/lists/*
 
@@ -39,9 +39,9 @@ ENV PATH="/root/sandbox/.npm-global/bin:$PATH"
 # Create sandbox directory
 RUN mkdir -p /root/sandbox
 
-# Copy gemini-cli scripts to sandbox
-COPY gemini-cli /root/sandbox/gemini-cli
-RUN chmod +x /root/sandbox/gemini-cli/*.sh
+# Copy gemini-cli scripts to /opt (will be copied to persistent sandbox by entrypoint)
+COPY gemini-cli /opt/gemini-cli
+RUN chmod +x /opt/gemini-cli/*.sh
 
 # Entrypoint script
 COPY entrypoint.sh /entrypoint.sh

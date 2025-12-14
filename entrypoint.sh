@@ -10,6 +10,12 @@ mkdir -p /root/sandbox/.npm-global
 mkdir -p /root/sandbox/.npm-cache
 mkdir -p /root/sandbox/.gemini
 
+# Copy gemini-cli scripts to persistent location if not exists
+if [ ! -d /root/sandbox/gemini-cli ]; then
+    echo "Copying gemini-cli scripts to persistent storage..."
+    cp -r /opt/gemini-cli /root/sandbox/gemini-cli
+fi
+
 # Symlink Gemini CLI config to persistent location
 if [ ! -L /root/.gemini ]; then
     rm -rf /root/.gemini
