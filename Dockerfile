@@ -39,9 +39,11 @@ ENV PATH="/root/sandbox/.npm-global/bin:$PATH"
 # Create sandbox directory
 RUN mkdir -p /root/sandbox
 
-# Copy gemini-cli scripts to /opt (will be copied to persistent sandbox by entrypoint)
+# Copy CLI tools to /opt (will be copied to persistent sandbox by entrypoint)
 COPY gemini-cli /opt/gemini-cli
-RUN chmod +x /opt/gemini-cli/*.sh
+COPY codex-cli /opt/codex-cli
+RUN chmod +x /opt/gemini-cli/*.sh 2>/dev/null || true
+RUN chmod +x /opt/codex-cli/*.sh 2>/dev/null || true
 
 # Entrypoint script
 COPY entrypoint.sh /entrypoint.sh

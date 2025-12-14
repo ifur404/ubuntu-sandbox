@@ -10,11 +10,14 @@ mkdir -p /root/sandbox/.npm-global
 mkdir -p /root/sandbox/.npm-cache
 mkdir -p /root/sandbox/.gemini
 
-# Always sync gemini-cli scripts from image to persistent storage
-echo "Syncing gemini-cli scripts..."
+# Always sync CLI tools from image to persistent storage
+echo "Syncing CLI tools..."
 mkdir -p /root/sandbox/gemini-cli
+mkdir -p /root/sandbox/codex-cli
 cp -r /opt/gemini-cli/* /root/sandbox/gemini-cli/
+cp -r /opt/codex-cli/* /root/sandbox/codex-cli/
 chmod +x /root/sandbox/gemini-cli/*.sh 2>/dev/null || true
+chmod +x /root/sandbox/codex-cli/*.sh 2>/dev/null || true
 
 # Symlink Gemini CLI config to persistent location
 if [ ! -L /root/.gemini ]; then
