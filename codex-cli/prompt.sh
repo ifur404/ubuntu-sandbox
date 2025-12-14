@@ -20,4 +20,4 @@ if [ -z "$PROMPT" ]; then
 fi
 
 # Run codex exec for non-interactive one-shot mode
-codex exec "$PROMPT"
+codex exec --skip-git-repo-check "$PROMPT"
